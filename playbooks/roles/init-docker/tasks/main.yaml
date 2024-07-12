@@ -1,0 +1,37 @@
+---
+- name: Get latest stable kubectl version
+  shell: curl -L -s https://dl.k8s.io/release/stable.txt
+  register: kubectl_version
+  changed_when: false
+
+- name: Download kubectl
+  get_url:
+    url: "https://dl.k8s.io/release/{{ kubectl_version.stdout }}/bin/linux/amd64/kubectl"
+    dest: /usr/local/bin/kubectl
+    mode: '0755'
+  become: yes
+
+- name: Verify kubectl installation
+  command: kubectl version --client
+  register: kubectl_version_check
+  changed_when: false
+
+- name: Display kubectl version
+  debug:
+    var: kubectl_version_check.stdout_lines
+
+- name: Check cluster access - Get namespaces
+  command: kubectl get namespaces
+  register: namespace_check
+  changed_when: false
+  ignore_errors: yes
+
+- name: Display namespace list
+  debug:
+    var: namespace_check.stdout_lines
+  when: namespace_check is success
+
+- name: Display error if unable to access cluster
+  debug:
+    msg: "Unable to access the cluster. Please check your kubeconfig and cluster status."
+  when: namespace_check is failed

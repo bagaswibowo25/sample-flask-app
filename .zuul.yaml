@@ -1,11 +1,11 @@
 - job:
-    name: create-container
+    name: test-job
     run: playbooks/create-container.yaml
 
 - project:
     check:
       jobs:
-        - create-container
+        - testjob
     gate:
       jobs:
-        - create-container
+        - testjob
