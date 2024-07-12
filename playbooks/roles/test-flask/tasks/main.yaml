@@ -30,13 +30,17 @@
   args:
     executable: /bin/bash
 
-
 - name: Start Flask app
   shell: 
     cmd: nohup python3 app.py > flask.log 2>&1 &
     chdir: /tmp/flask-app
   async: 45
   poll: 0
+  register: app_start
+
+- name: Display Flask app response
+  debug:
+    var: app_start.stdout
 
 - name: Wait for the application to be ready
   wait_for:
