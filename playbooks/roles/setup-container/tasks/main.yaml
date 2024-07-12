@@ -19,6 +19,16 @@
   args:
     chdir: /tmp/flask-app
   shell: docker build -t bagas25/flask-app .
+  register: build_output
+  ignore_errors: yes
+
+- name: Display stdout build image
+  debug:
+    var: build_output.stdout
+
+- name: Display stderr build image
+  debug:
+    var: build_output.stderr
 
 - name: Run Flask app container
   shell: docker run -p 5000:5000 -d bagas25/flask-app 
