@@ -1,4 +1,8 @@
 - job:
+    name: test-flask-app
+    run: playbooks/test-flask-app.yaml
+
+- job:
     name: create-docker-container
     run: playbooks/create-container.yaml
 
