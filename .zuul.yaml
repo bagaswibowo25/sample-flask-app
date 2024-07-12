@@ -1,10 +1,12 @@
 - job:
     name: test-flask-app
     run: playbooks/test-flask-app.yaml
+    provides: test-result
 
 - job:
     name: create-docker-container
     run: playbooks/create-container.yaml
+    requires: test-result
     nodeset:
       nodes:
         - name: pod-dind
