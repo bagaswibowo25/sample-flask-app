@@ -1,0 +1,3 @@
+- job:
+    name: create-container
+    run: playbooks/create-container.yaml
