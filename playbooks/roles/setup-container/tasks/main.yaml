@@ -12,6 +12,14 @@
     chdir: /tmp/flask-app
   shell: docker build -t bagas25/flask-app .
 
+- name: List directory contents using shell module
+  shell: ls -l /tmp/flask-app
+  register: dir_contents
+
+- name: Display directory contents
+  debug:
+    var: dir_contents.stdout
+
 - name: Run Flask app container
   shell: docker run -p 5000:5000 -d bagas25/flask-app 
 
