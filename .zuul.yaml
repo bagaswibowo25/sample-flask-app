@@ -4,7 +4,7 @@
 
 - job:
     name: create-docker-container
-    run: playbooks/setup-container.yaml
+    run: playbooks/create-container.yaml
     nodeset:
       nodes:
         - name: pod-dind
