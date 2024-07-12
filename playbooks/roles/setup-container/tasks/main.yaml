@@ -1,0 +1,50 @@
+- name: Copy Flask app files
+  copy:
+    src: "../../../{{ item }}"
+    dest: "/tmp/flask-app/"
+  loop:
+    - app.py
+    - Dockerfile
+    - requirements.txt
+
+- name: Build Docker image
+  docker_image:
+    name: flask-test-app
+    build:
+      path: /tmp/flask-app
+    source: build
+
+- name: Run Flask app container
+  docker_container:
+    name: flask-test-container
+    image: flask-test-app
+    state: started
+    ports:
+      - "5000:5000"
+
+- name: Wait for the application to be ready
+  wait_for:
+    port: 5000
+    delay: 10
+    timeout: 30
+
+- name: Test Flask app
+  uri:
+    url: http://localhost:5000
+    return_content: yes
+  register: flask_response
+  failed_when: flask_response.status != 200
+
+- name: Display Flask app response
+  debug:
+    var: flask_response.content
+
+- name: Clean up - stop and remove container
+  docker_container:
+    name: flask-test-container
+    state: absent
+
+- name: Clean up - remove Docker image
+  docker_image:
+    name: flask-test-app
+    state: absent
