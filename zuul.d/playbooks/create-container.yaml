@@ -1,7 +1,4 @@
 ---
-- name: Deploy Docker on Instance
-  hosts: all
-  gather_facts: false
-
+- hosts: all
   roles:
     - role: init-docker
