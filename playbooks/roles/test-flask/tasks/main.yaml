@@ -1,0 +1,58 @@
+---
+- name: Ensure Python3 and pip are installed
+  package:
+    name:
+      - python3
+      - python3-pip
+    state: present
+  become: yes
+
+- name: Create directory for Flask app
+  file:
+    path: /tmp/flask-app
+    state: directory
+
+- name: Copy Flask app files
+  copy:
+    src: "../../../{{ item }}"
+    dest: "/tmp/flask-app/"
+  loop:
+    - app.py
+    - requirements.txt
+
+- name: Install Flask and dependencies
+  pip:
+    requirements: /tmp/flask-app/requirements.txt
+
+- name: Start Flask app
+  shell: 
+    cmd: nohup python3 app.py > flask.log 2>&1 &
+    chdir: /tmp/flask-app
+  async: 45
+  poll: 0
+
+- name: Wait for the application to be ready
+  wait_for:
+    port: 5000
+    delay: 5
+    timeout: 30
+
+- name: Test Flask app
+  uri:
+    url: http://localhost:5000
+    return_content: yes
+  register: flask_response
+  failed_when: flask_response.status != 200
+
+- name: Display Flask app response
+  debug:
+    var: flask_response.content
+
+- name: Stop Flask app
+  shell: pkill -f "python3 app.py"
+  ignore_errors: yes
+
+- name: Clean up - remove Flask app files
+  file:
+    path: /tmp/flask-app
+    state: absent
