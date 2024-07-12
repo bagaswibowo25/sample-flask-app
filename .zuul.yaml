@@ -6,6 +6,12 @@
     name: create-docker-container
     run: playbooks/create-container.yaml
 
+- nodeset:
+    name: pod-dind
+    nodes:
+      - name: pod-dind
+        label: pod-dind
+
 - project:
     check:
       jobs:
