@@ -20,9 +20,16 @@
     - app.py
     - requirements.txt
 
-- name: Install Flask and dependencies
-  pip:
-    requirements: /tmp/flask-app/requirements.txt
+- name: Create a virtual environment
+  command: python3 -m venv test
+
+- name: Install packages in the virtual environment
+  shell: |
+    source test/bin/activate
+    pip install -r /tmp/flask-app/requirements.txt
+  args:
+    executable: /bin/bash
+
 
 - name: Start Flask app
   shell: 
