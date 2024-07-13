@@ -1,5 +1,5 @@
 - secret:
-    name: dokcer-auth
+    name: docker-auth
     data:
       password: !encrypted/pkcs1-oaep
         - JrFv2kk2c7XkzoYgNFZYjqF9zr7R/yYvClMk3RdEZg4wky1g1plivhqyNr4cDJdTACm/F
