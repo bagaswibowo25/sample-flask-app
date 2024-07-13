@@ -10,10 +10,10 @@
 - name: Build Docker image
   args:
     chdir: /tmp/flask-app
-  shell: docker build -t bagas25/flask-app .
+  shell: docker build -t {{ image.repository }}:{{ image.tag }} .
 
 - name: Run Flask app container
-  shell: docker run -p 5000:5000 --name flask-test-container -d bagas25/flask-app 
+  shell: docker run -p 5000:5000 --name flask-test-container -d {{ image.repository }}:{{ image.tag }} 
 
 - name: Wait for the application to be ready
   wait_for:
