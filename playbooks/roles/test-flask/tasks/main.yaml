@@ -35,10 +35,9 @@
 - name: Start Flask app
   shell: |
     source /tmp/flask-app/test/bin/activate
-    sleep 5
     python3 /tmp/flask-app/app.py > /tmp/flask-app/flask.log 2>&1 &
-  async: 300
-  poll: 0
+  args:
+    executable: /bin/bash
 
 - name: Wait for the application to be ready
   wait_for:
