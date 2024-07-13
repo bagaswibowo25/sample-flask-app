@@ -1,3 +1,18 @@
+- secret:
+    name: dokcer-auth
+    data:
+      password: !encrypted/pkcs1-oaep
+        - JrFv2kk2c7XkzoYgNFZYjqF9zr7R/yYvClMk3RdEZg4wky1g1plivhqyNr4cDJdTACm/F
+          670yKFO7+YrhWVdfRPgaQdY8PlhmKM/poFeg/FCUzuQnYK2URxEP5GAPtYAp09fpO13PZ
+          GkaUOk9QXPSC8uVKtulG3RNHG9z1P6nBBwKM8Hjpx9HC1uCMEfbGc3Va8Sd+AFHKZSqod
+          MxmPd99CZIqe55STnnFpjYbDAbHWG1CB2QDW97u9d1XKeETMaxnwrVwPvXMct+08ac7xL
+          9OkAKLXFJLpNCiXVa5+jhwlTTXA9r9m6EMdtB0PeS85YwvnWQNqwuWfh4jth+RDE6GD3T
+          sqfMy2SP8wuH3X3DvVI8Tr8XwsyjM9LqHwylLA7StaiQ5Nk8NvhzqGDLrQLViXWZQHmKK
+          8Oe2pu4mSsZ22SooTm1FQ2GpDqFdpGJdXG/V7jyNZX2KPq+IZ5luxLgbfTSz2FPfpUptK
+          nCWgFM8eVFS9WRHnb/BZ1q7KA/RqXfy4O7tzG8Pt6HsS3//TORIViMi+I8mQH9WKHWASd
+          j7vSEwewrNXWFJiGrghEjSnDpo7KjbKTTzajzjM5ZQvZWZlMFcSjM1X68wKSeZE9E7qjf
+          QU+gPxqLXn+iW+kCrAuwuP/nBaMYKFxobNZ9O4Cr3f5vwFBWIMuyYh9jXDDCJY=
+
 - job:
     name: test-flask-app
     run: playbooks/test-flask-app.yaml
@@ -20,21 +35,6 @@
       nodes:
         - name: pod-dind
           label: pod-dind
-
-- secret:
-    name: dokcer-auth
-    data:
-      password: !encrypted/pkcs1-oaep
-        - JrFv2kk2c7XkzoYgNFZYjqF9zr7R/yYvClMk3RdEZg4wky1g1plivhqyNr4cDJdTACm/F
-          670yKFO7+YrhWVdfRPgaQdY8PlhmKM/poFeg/FCUzuQnYK2URxEP5GAPtYAp09fpO13PZ
-          GkaUOk9QXPSC8uVKtulG3RNHG9z1P6nBBwKM8Hjpx9HC1uCMEfbGc3Va8Sd+AFHKZSqod
-          MxmPd99CZIqe55STnnFpjYbDAbHWG1CB2QDW97u9d1XKeETMaxnwrVwPvXMct+08ac7xL
-          9OkAKLXFJLpNCiXVa5+jhwlTTXA9r9m6EMdtB0PeS85YwvnWQNqwuWfh4jth+RDE6GD3T
-          sqfMy2SP8wuH3X3DvVI8Tr8XwsyjM9LqHwylLA7StaiQ5Nk8NvhzqGDLrQLViXWZQHmKK
-          8Oe2pu4mSsZ22SooTm1FQ2GpDqFdpGJdXG/V7jyNZX2KPq+IZ5luxLgbfTSz2FPfpUptK
-          nCWgFM8eVFS9WRHnb/BZ1q7KA/RqXfy4O7tzG8Pt6HsS3//TORIViMi+I8mQH9WKHWASd
-          j7vSEwewrNXWFJiGrghEjSnDpo7KjbKTTzajzjM5ZQvZWZlMFcSjM1X68wKSeZE9E7qjf
-          QU+gPxqLXn+iW+kCrAuwuP/nBaMYKFxobNZ9O4Cr3f5vwFBWIMuyYh9jXDDCJY=
 
 - project:
     check:
