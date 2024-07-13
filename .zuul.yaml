@@ -22,6 +22,11 @@
     name: create-docker-container
     run: playbooks/create-container.yaml
     requires: test
+    group-vars:
+      dind:
+        image:
+          repository: bagas25/flask-app
+          tag: v1
     secrets:
       - name: docker_auth
         secret: docker-auth
@@ -29,12 +34,15 @@
       nodes:
         - name: pod-dind
           label: pod-dind
+      groups:
+        - name: dind
+          nodes:
+            - pod-dind
 
 - project:
     check:
       jobs:
         - test-flask-app
-        - create-docker-container
     gate:
       jobs:
         - create-docker-container
