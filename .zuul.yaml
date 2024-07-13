@@ -25,7 +25,7 @@
     group-vars:
       dind:
         image:
-          name: bagas25/flask-app
+          repository: bagas25/flask-app
           tag: v1
     secrets:
       - name: docker_auth
