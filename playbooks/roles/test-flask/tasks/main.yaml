@@ -22,21 +22,22 @@
 
 - name: Create a virtual environment
   command: python3 -m venv test
+  args:
+    chdir: /tmp/flask-app
 
 - name: Install packages in the virtual environment
   shell: |
-    source test/bin/activate
+    source /tmp/flask-app/test/bin/activate
     pip install -r /tmp/flask-app/requirements.txt
   args:
     executable: /bin/bash
 
 - name: Start Flask app
   shell: |
-    source test/bin/activate
+    source /tmp/flask-app/test/bin/activate
     python3 /tmp/flask-app/app.py > /tmp/flask-app/flask.log 2>&1 &
   async: 300
   poll: 0
-  register: app_start
 
 - name: Wait for the application to be ready
   wait_for:
