@@ -16,18 +16,12 @@
 - job:
     name: test-flask-app
     run: playbooks/test-flask-app.yaml
+    provides: test
 
 - job:
     name: create-docker-container
     run: playbooks/create-container.yaml
-    nodeset:
-      nodes:
-        - name: pod-dind
-          label: pod-dind
-
-- job:
-    name: push-container-image
-    run: playbooks/push-container-image.yaml
+    requires: test
     secrets:
       - name: docker_auth
         secret: docker-auth
