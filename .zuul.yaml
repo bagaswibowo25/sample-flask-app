@@ -35,7 +35,6 @@
       jobs:
         - test-flask-app
         - create-docker-container
-        - push-container-image
     gate:
       jobs:
         - create-docker-container
