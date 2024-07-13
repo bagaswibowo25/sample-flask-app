@@ -1,0 +1,4 @@
+- hosts: all
+  roles:
+    - setup-container
+    - push-image

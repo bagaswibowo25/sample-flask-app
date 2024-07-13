@@ -1,0 +1,7 @@
+- name: Authenticate to docker hub
+  command: "docker login -u bagas25 --password-stdin"
+  args:
+    stdin: "{{ docker_auth.password }}"
+
+- name: Push image to docker hub
+  shell: docker push bagas25/flask-app
