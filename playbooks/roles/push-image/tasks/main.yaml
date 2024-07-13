@@ -4,4 +4,4 @@
     stdin: "{{ docker_auth.password }}"
 
 - name: Push image to docker hub
-  shell: docker push bagas25/flask-app
+  shell: docker push {{ image.repository }}:{{ image.tag }}
