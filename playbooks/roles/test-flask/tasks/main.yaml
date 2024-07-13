@@ -31,9 +31,9 @@
     executable: /bin/bash
 
 - name: Start Flask app
-  shell: 
-    cmd: nohup python3 app.py > flask.log 2>&1 &
-    chdir: /tmp/flask-app
+  shell: |
+    source test/bin/activate
+    python3 /tmp/flask-app/app.py > /tmp/flask-app/flask.log 2>&1 &
   async: 300
   poll: 0
   register: app_start
