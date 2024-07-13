@@ -23,7 +23,7 @@
     run: playbooks/create-container.yaml
     requires: test
     group-vars:
-      pod-dind:
+      dind:
         image:
           name: bagas25/flask-app
           tag: v1
